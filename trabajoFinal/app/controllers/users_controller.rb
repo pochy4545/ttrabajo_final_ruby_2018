@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def showUsers
-    users=User.all
-    render json: users 
+    @users=User.all
+    render json: @users 
   end
   def create
   	@user = User.new(user_params)
