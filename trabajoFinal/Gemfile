@@ -5,7 +5,9 @@ ruby '2.5.1'
 #para json serializer
 gem 'jbuilder', '~> 2.5'
 gem 'active_model_serializers', '~> 0.10.0'
-
+#para verificacion de creacion y token
+gem 'faraday'
+gem 'oj'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1', '>= 5.2.1.1'
 # Use mysql as the database for Active Record

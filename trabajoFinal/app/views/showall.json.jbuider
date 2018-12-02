@@ -1,4 +1,0 @@
-
-json.array! @questions do |quest|
-  json.title quest.title
-end
