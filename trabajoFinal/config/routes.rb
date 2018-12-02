@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
+    #Este es un endpoint para mi
+    get 'users', to: 'users#showUsers'
     #Crea un nuevo usuario con los datos provistos en la petición.
     # Los atributos que se reciben son los correspondientes al modelo User. token:no
     post 'users', to: 'users#create'

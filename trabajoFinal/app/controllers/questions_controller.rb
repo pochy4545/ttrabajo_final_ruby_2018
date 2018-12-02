@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
 
  def showall
-  
+    @questions=Question.all
  end
 
  def show
