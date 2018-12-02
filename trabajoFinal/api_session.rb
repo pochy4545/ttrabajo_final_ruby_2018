@@ -5,15 +5,16 @@ require 'oj'
 client = Faraday.new(url: 'http://localhost:3000') do |config|
   config.adapter  Faraday.default_adapter
 end
- 
+
 response = client.post do |req|
-  req.url '/users'
+  req.url '/sessions'
   req.headers['Content-Type'] = 'application/json'
-  req.body = '{ "user": {"username": "test","password":"m","screen_name":"pochy","email":"agustin"} }'
+  req.body = '{ "user": {"username": "test","password":"m"} }'
 end
 
- 
+
 # client here...
- 
+
 puts Oj.load(response.body)
 puts response.status
+
