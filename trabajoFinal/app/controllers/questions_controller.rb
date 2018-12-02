@@ -17,7 +17,12 @@ class QuestionsController < ApplicationController
  end
 
  def show
-
+    @quest=Question.find_by_id(params[:id])
+    if @quest
+        render json: @quest
+    else
+        render json: {:mensaje => "no existe la pregunta"},status: 422
+    end
  end
 
  def create
@@ -53,7 +58,7 @@ class QuestionsController < ApplicationController
  end
 
  def question_params
-    params.require(:question).permit(:title,:description,:status,:sort,:token)
+    params.require(:question).permit(:title,:description,:status,:sort,:token,:id)
  end
 
 end
