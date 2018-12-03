@@ -7,9 +7,9 @@ client = Faraday.new(url: 'http://localhost:3000') do |config|
 end
 
 response = client.post do |req|
-  req.url '/sessions'
+  req.url '/questions/5/answers'
   req.headers['Content-Type'] = 'application/json'
-  req.body = '{ "user": {"username": "st","password":"m"} }'
+  req.body = '{ "question": {"token":"4c49dca58a330ccac9f9e2242110a690","content":"anda" }}'
 end
 
 
@@ -17,4 +17,5 @@ end
 
 puts Oj.load(response.body)
 puts response.status
+
 

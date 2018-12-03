@@ -9,7 +9,7 @@ end
 response = question.post do |req|
   req.url '/questions'
   req.headers['Content-Type'] = 'application/json'
-  req.body = '{ "question": {"title": "test","description":"m"} }'
+  req.body = '{ "question": {"title": "test","description":"m","token":"4c49dca58a330ccac9f9e2242110a690"} }'
 end
 
 

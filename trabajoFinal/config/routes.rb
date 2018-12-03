@@ -63,7 +63,7 @@ Rails.application.routes.draw do
     #Retorna todas las respuestas para la pregunta identificada por el id 
     #recibido en el parámetro :question_id.
     #token:no
-    get '/questions/:question_id/answers', to: 'questions#until'
+    get '/questions/:question_id/answers', to: 'questions#dameRespuestas'
 
     #Crea una nueva respuesta asociada a la pregunta identificada por el parámetro 
     #:question_id con el parámetro content recibido en la petición. Al crearla, se registra
@@ -71,7 +71,7 @@ Rails.application.routes.draw do
     #respuesta. Si la pregunta está resuelta, no se debe admitir la creación de más respuestas,
     #retornando un código HTTP 422 Unprocessable entity.
     #token:si
-    post '/questions/:question_id/answers', to: 'questions#until'
+    post '/questions/:question_id/answers', to: 'questions#crearRespuesta'
 
     #Borra la respuesta existente, identificada por el parámetro :id y asociada a la pregunta 
     #identificada por el parámetro :question_id. No se debe permitir el borrado si la respuesta 

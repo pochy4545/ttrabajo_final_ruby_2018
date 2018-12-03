@@ -6,10 +6,10 @@ client = Faraday.new(url: 'http://localhost:3000') do |config|
   config.adapter  Faraday.default_adapter
 end
 
-response = client.post do |req|
-  req.url '/sessions'
+response = client.delete do |req|
+  req.url '/questions/5'
   req.headers['Content-Type'] = 'application/json'
-  req.body = '{ "user": {"username": "st","password":"m"} }'
+  req.body = '{ "question": {"token":"4c49dca58a330ccac9f9e2242110a690" }}'
 end
 
 
