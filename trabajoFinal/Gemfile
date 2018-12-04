@@ -8,8 +8,9 @@ gem 'active_model_serializers', '~> 0.10.0'
 #para verificacion de creacion 
 gem 'faraday'
 gem 'oj'
-
-
+#para test 
+gem 'test_helper'
+gem 'json'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1', '>= 5.2.1.1'
 # Use mysql as the database for Active Record

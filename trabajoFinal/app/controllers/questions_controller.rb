@@ -21,7 +21,7 @@
     if @quest
         render json: @quest
     else
-        render json: {:mensaje => "no existe la pregunta"},status: 422
+        render_error("no existe la pregunta.",422)
     end
  end
 
@@ -34,15 +34,15 @@
         @question.description = question_params[:description]
         @question.user_id = @user.dameid(question_params[:token])
         if @question.save
-          render json: {:mensaje => "pregunta creada"},status: :created
+           render_error("preguta creada",:created)
         else
           render json: @question.errors, status: :unprocessable_entity
         end
     else
-      render json: {:mensaje => "genere un nuevo token,token invalido o inexistente"},status: 422
+      render_error("genere un nuevo token,token invalido o inexistente",422)
     end
   else
-     render json: {:mensaje => "no se recivio token "},status: 422
+    render_error("no se recivio token ",422)
   end
  end
 
@@ -51,7 +51,7 @@
     if @quest
        # render json: @quest
     else
-        render json: {:mensaje => "no existe la pregunta a actualizar"},status: 422
+        render_error("no existe la pregunta a actualizar",422)
     end
 
  end
@@ -64,22 +64,22 @@
           if @quest
               if  @quest.user_id==@user.dameid(question_params[:token])
                    if @quest.answers.count()>0
-                      render json:{:mensaje => "la pregunta tiene respuestas"}
+                      render_error("la pregunta tiene respuestas",422)
                    else
                       @quest.destroy
-                      render json: {:mensaje =>"se elimino la pregunta conrrestamente"},status:200
+                      render_error("se elimino la pregunta conrrestamente",200)
                   end
               else
-                render json: {:mensaje => "no tiene previlegios para borrar la pregunta"},status:422
+                render_error("no tiene previlegios para borrar la pregunta",422)
               end
           else
-              render json: {:mensaje => "no existe la pregunta"},status: 422
+              render_error("no existe la pregunta",422)
           end
       else
-        render json: {:mensaje => "genere un nuevo token,token invalido o inexistente"},status: 422
+        render_error("genere un nuevo token,token invalido o inexistente",422)
       end
     else
-       render json: {:mensaje => "no se recivio token "},status: 422
+       render_error("no se recivio token ",422)
     end
 
  end
@@ -89,7 +89,7 @@
   if @quest
      render json: @quest.answers
   else
-      render json: {:mensaje => "no existe la pregunta de la cual se requieren respuestas"},status: 422
+      render_error("no existe la pregunta de la cual se requieren respuestas",422)
   end
  end
  
@@ -100,7 +100,7 @@
       if (!question_params[:token].blank?)
        if @user.existeUser(question_params[:token])
           if (!@quest.status)
-              render json: {:mensaje => "la pregunta ya esta resuelta"},status:422
+              render_error("la pregunta ya esta resuelta",422)
           else
             if (!question_params[:content].blank?)
               #respuesta=@quest.answers.new()
@@ -110,22 +110,22 @@
               @respuesta.question_id = @quest.id 
 
                if @respuesta.save
-                  render json: {:mensaje => "se creeo la respuesta correctamente"},status:201
+                  render_error("se creeo la respuesta correctamente",201)
                else
                  render json: @respuesta.errors, status: :unprocessable_entity
                end
             else
-              render json:{:mesnaje => "content vacio"},satus:422
+              render_error("content vacio",422)
             end
            end    
        else
-         render json: {:mensaje => "genere un nuevo token,token invalido o inexistente"},status: 422
+         render_error("genere un nuevo token,token invalido o inexistente",422)
        end
      else
-        render json: {:mensaje => "no se recivio token "},status: 422
+        render_error("no se recivio token ",422)
      end
   else
-      render json: {:mensaje => "no existe la pregunta a la cual se quiere responder"},status: 422
+      render_error("no existe la pregunta a la cual se quiere responder",422)
   end
 end
  
@@ -139,25 +139,25 @@ end
           if (!question_params[:token].blank?)
              if @user.existeUser(question_params[:token])
                if  @answer.user_id==@user.dameid(question_params[:token])
-                  @answer.destroy
-                  render json: {:mensaje => "respuesta eliminada"},status:200
+             #     @answer.destroy
+             #    render json: {:mensaje => "respuesta eliminada"},status:200
                else
-                 render json: {:mendaje => "no tiene previlegios para borrar la respuesta"},status:422
+                 render_error("no tiene previlegios para borrar la respuesta",422)
                end
              else
-               render json: {:mensaje => "token invalido o inexistente"},status:422
+               render_error("token invalido o inexistente",422)
              end 
           else
-            render json: {:mensaje => "no se recivio token "},status: 422
+            render_error("no se recivio token ",422)
           end
        else
-          render json: {:mensaje => "la respuesta no esta asociada a la pregunta"},status: 422
+          render_error("la respuesta no esta asociada a la pregunta",422)
        end
     else
-     render json: {:mensaje => "no existe la respuesta"},status: 422
+     render_error("no existe la respuesta",422)
     end
   else
-      render json: {:mensaje => "no existe la pregunta "},status: 422
+      render_error("no existe la pregunta ",422)
   end  
  end
 

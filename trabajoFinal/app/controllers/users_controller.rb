@@ -9,12 +9,12 @@ class UsersController < ApplicationController
     @user=User.new(user_params)
     @user.passwordHash = user_params[:password]
   	    if @user.save
-  	      render json: {:mensaje => "usuario creado"},status: :created
+  	      render_error("usuario creado",:created)
   	    else
   	      render json: @user.errors, status: :unprocessable_entity
   	    end
     else
-      render json: {:mensaje => "email o nombre repetido"},status: 422 
+      render_error("email o nombre repetido",422) 
     end
   end
 
@@ -29,10 +29,10 @@ class UsersController < ApplicationController
             render json: @user.errors, status: :unprocessable_entity
         end
       else
-        render json: {:mensaje => "usuario o contraseña incorrecta"}, status:422
+        render_error("usuario o contraseña incorrecta",422)
       end
     else
-      render json: {:mensaje => "usuario o contraseña incorrecta"}, status: 422
+      render_error("usuario o contraseña incorrecta",422)
     end
   end
   
