@@ -4,13 +4,18 @@ class UsersController < ApplicationController
     render json: @users 
   end
   def create
-  	@user = User.new(user_params)
+  	@user = User.new()
+    if ((!@user.existeUsername(user_params[:username]))or (!@user.existeEmail(user_params[:email])))
+    @user=User.new(user_params)
     @user.passwordHash = user_params[:password]
   	    if @user.save
   	      render json: {:mensaje => "usuario creado"},status: :created
   	    else
   	      render json: @user.errors, status: :unprocessable_entity
   	    end
+    else
+      render json: {:mensaje => "email o nombre repetido"},status: 422 
+    end
   end
 
   def session

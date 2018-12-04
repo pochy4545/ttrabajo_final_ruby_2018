@@ -2,10 +2,21 @@ require 'bcrypt'
 
 class User < ApplicationRecord
  include BCrypt
- attribute :token, default: "undefined"
+ attribute :token
  has_many :questions, dependent: :destroy
+ validates_associated :questions
  validates_presence_of :username, :password, :screen_name, :email
- 
+ validates :username, uniqueness:  true
+ validates :email, uniqueness: true
+
+
+ def existeUsername(username)
+   User.find_by_username(username)
+ end
+
+ def existeEmail(email)
+   User.find_by_email(email)
+ end
 
  def existeUser(token)
    User.find_by_token(token)

@@ -9,7 +9,7 @@ end
 response = client.post do |req|
   req.url '/users'
   req.headers['Content-Type'] = 'application/json'
-  req.body = '{ "user": {"username": "test","password":"m","screen_name":"pochy","email":"agustin"} }'
+  req.body = '{ "user": {"username":"pochi","password":"mierda4545","screen_name":"poch3223","email":"agustin.c.96@hotmail.com"} }'
 end
 
  

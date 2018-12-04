@@ -103,6 +103,7 @@
               render json: {:mensaje => "la pregunta ya esta resuelta"},status:422
           else
             if (!question_params[:content].blank?)
+              #respuesta=@quest.answers.new()
               @respuesta=Answer.new()
               @respuesta.content=question_params[:content]
               @respuesta.user_id = @user.dameid(question_params[:token])
@@ -111,7 +112,7 @@
                if @respuesta.save
                   render json: {:mensaje => "se creeo la respuesta correctamente"},status:201
                else
-                 render json: {:mensaje =>"error inesperado al guardar la respuesta intente nuevamente"}
+                 render json: @respuesta.errors, status: :unprocessable_entity
                end
             else
               render json:{:mesnaje => "content vacio"},satus:422
@@ -127,8 +128,40 @@
       render json: {:mensaje => "no existe la pregunta a la cual se quiere responder"},status: 422
   end
 end
+ 
+ def eliminarRespuesta
+  @quest=Question.find_by_id(params[:question_id])
+  if @quest
+    @answer=Answer.find_by_id(params[:id])
+    if @answer
+       if @answer.question_id == @question.id
+         @user=User.new()
+          if (!question_params[:token].blank?)
+             if @user.existeUser(question_params[:token])
+               if  @answer.user_id==@user.dameid(question_params[:token])
+                  @answer.destroy
+                  render json: {:mensaje => "respuesta eliminada"},status:200
+               else
+                 render json: {:mendaje => "no tiene previlegios para borrar la respuesta"},status:422
+               end
+             else
+               render json: {:mensaje => "token invalido o inexistente"},status:422
+             end 
+          else
+            render json: {:mensaje => "no se recivio token "},status: 422
+          end
+       else
+          render json: {:mensaje => "la respuesta no esta asociada a la pregunta"},status: 422
+       end
+    else
+     render json: {:mensaje => "no existe la respuesta"},status: 422
+    end
+  else
+      render json: {:mensaje => "no existe la pregunta "},status: 422
+  end  
+ end
 
- def until
+ def respuestaCorrecta
  end
 
  def question_params

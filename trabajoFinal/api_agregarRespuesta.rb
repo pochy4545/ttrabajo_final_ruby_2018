@@ -7,9 +7,9 @@ client = Faraday.new(url: 'http://localhost:3000') do |config|
 end
 
 response = client.post do |req|
-  req.url '/questions/5/answers'
+  req.url '/questions/6/answers'
   req.headers['Content-Type'] = 'application/json'
-  req.body = '{ "question": {"token":"4c49dca58a330ccac9f9e2242110a690","content":"anda" }}'
+  req.body = '{ "question": {"token":"6da9edab9df1eecf5bf5d2677b1acfdc","content":"respuesta uno" }}'
 end
 
 
