@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :validate_type_users, only: [:create]
+
   def showUsers
     @users=User.all
     render json: @users 
@@ -24,7 +26,7 @@ class UsersController < ApplicationController
       if @user.passworconsulta == user_params[:password]
         @user.token=@user.generate_token
         if @user.save
-            render json:@user,status: 200
+            render json:@user,status: :ok
         else
             render json: @user.errors, status: :unprocessable_entity
         end
@@ -36,10 +38,11 @@ class UsersController < ApplicationController
     end
   end
   
-  private
-   
+
+  private 
   def user_params
-      params.require(:user).permit(:username,:password,:screen_name,:email)
+     
+      ActiveModelSerializers::Deserialization.jsonapi_parse(params)
   end
   
 end

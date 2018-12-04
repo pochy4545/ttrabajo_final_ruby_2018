@@ -1,7 +1,0 @@
-<% 6.times do |i| %>
-user_<% i %>:
-  username: <%= "user nr#{i}"%>
-  email: <%= "email nr#{i}"%>
-  password: <%=BCrypt::Password.create('password')%>
-  token: <%=SecureRandom.base58(24)%>
-<% end %>

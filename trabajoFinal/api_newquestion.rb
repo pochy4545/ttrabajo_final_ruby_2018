@@ -9,7 +9,8 @@ end
 response = question.post do |req|
   req.url '/questions'
   req.headers['Content-Type'] = 'application/json'
-  req.body = '{ "question": {"title": "test","description":"m","token":"6da9edab9df1eecf5bf5d2677b1acfdc"} }'
+  req.headers['X-QA-Key'] = "9423e6d6e670b7ea753688f7ff1a4dae"
+  req.body = '{ "data": {"type":"questions","attributes":{ "title": "test","description":"sasas"} }}'
 end
 
 

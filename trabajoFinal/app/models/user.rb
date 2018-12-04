@@ -11,22 +11,13 @@ class User < ApplicationRecord
 
 
  def existeUsername(username)
-   User.find_by_username(username)
+   User.find_by username: username
  end
 
  def existeEmail(email)
-   User.find_by_email(email)
+   User.find_by email: email
  end
 
- def existeUser(token)
-   User.find_by_token(token)
- end
-
- def dameid(token)
- 	user=User.find_by_token(token)
- 	return user.id
- end
- 
  def passworconsulta
      @password ||= Password.new(password)
  end
