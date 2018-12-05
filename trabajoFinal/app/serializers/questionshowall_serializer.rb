@@ -1,5 +1,4 @@
 class QuestionshowallSerializer < ActiveModel::Serializer
-#aca mustro solo los atributos que quiero mostrar cuando llamo a metodos como to_json y as_json
   attributes :title,:description,:status,:cantidadDeRespuestas
   def cantidadDeRespuestas
   	@object.answers.count()
