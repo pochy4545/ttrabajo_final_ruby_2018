@@ -6,11 +6,10 @@ question = Faraday.new(url: 'http://localhost:3000') do |config|
   config.adapter  Faraday.default_adapter
 end
 
-response = question.post do |req|
+response = question.get do |req|
   req.url '/questions'
   req.headers['Content-Type'] = 'application/json'
-  req.headers['X-QA-Key'] = "0113e9de4d0f3891d810b877ca26d31e"
-  req.body = '{ "data": {"type":"questions","attributes":{ "title": "test","description":"sasas"} }}'
+  req.body = '{ "data": {"type":"questions","attributes":{"sort":"needing_help"}}}'
 end
 
 
@@ -18,6 +17,4 @@ end
 
 puts Oj.load(response.body)
 puts response.status
-
-
 

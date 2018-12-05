@@ -2,19 +2,19 @@ class QuestionsController < ApplicationController
   #before_action :validate_type_questions
  before_action :refresh_token , only: [:create,:delete,:update,:crearRespuesta,:eliminarRespuesta,]
  def showall
-    questions=Question.limit(50)
+    questions=Question.all
     if (!question_params[:sort].blank?)
       @result= case question_params[:sort]
-       when "latest" then @result = questions.order(created_at: :asc)
-       when "pending_first"then @result = questions.order()
-       when "needing_help"then @result = questions.order()
+       when "latest" then @result = questions.order(created_at: :desc)
+       when "pending_first"then @result = questions.order(status: :asc).order(created_at: :desc)
+       when "needing_help"then @result = questions.where(status: 0).order(created_at: :asc)
        else
-       	@result=""
+       	@result=questions.order(created_at: :desc)
        end	 
     else 
-    	@result = questions.order(created_at: :asc)
+    	@result = questions.order(created_at: :desc)
     end
-    render json: @result ,each_serializer: QuestionshowallSerializer
+    render json: @result.last(50) ,each_serializer: QuestionshowallSerializer
  end
 
  #compount document???
