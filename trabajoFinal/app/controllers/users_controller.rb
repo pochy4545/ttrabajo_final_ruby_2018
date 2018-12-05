@@ -16,7 +16,7 @@ class UsersController < ApplicationController
   	      render json: @user.errors, status: :unprocessable_entity
   	    end
     else
-      render_error("email o nombre repetido",422) 
+      render_error("email o nombre repetido",:unprocessable_entity)
     end
   end
 
