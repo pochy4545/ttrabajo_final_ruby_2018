@@ -11,9 +11,7 @@ class AnswersController < ApplicationController
      if (!@quest.status)
         render_error("la pregunta ya esta resuelta",:unprocessable_entity)
      else
-      #respuesta=@quest.answers.new()
-      @respuesta=Answer.new()
-      @respuesta.content = answer_params[:content]
+      @respuesta=Answer.new(answer_params)
       @respuesta.user_id = user_for_token().id
       @respuesta.question_id = @quest.id 
       if @respuesta.save

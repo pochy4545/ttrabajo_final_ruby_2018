@@ -34,7 +34,9 @@ class User < ApplicationRecord
      self.password = @password
  end
 
- 
+ def valida_password(password)
+    passworconsulta == password
+ end
   
  # generate_token creará un token en un ciclo interminable y revisará si
  #es único o no. Tan pronto como un token único sea encontrado, regrésalo:

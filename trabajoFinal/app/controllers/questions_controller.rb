@@ -1,11 +1,10 @@
 class QuestionsController < ApplicationController
  def showall
-    questions=Question.all
     @result = case question_params[:sort]
-       when "pending_first"then questions.order(status: :asc).order(created_at: :desc)
-       when "needing_help"then questions.where(status: 0).order(created_at: :asc)
+       when "pending_first"then Question.by_pending_first
+       when "needing_help"then Question.needing_help
        else
-       	questions.order(created_at: :desc)
+       	Question.natural_oder
        end	 
    render json: @result.last(50) ,each_serializer: QuestionshowallSerializer
  end
@@ -20,9 +19,7 @@ class QuestionsController < ApplicationController
 
  def create
       if(user_for_token)
-        @question=Question.new()
-        @question.title = question_params[:title]
-        @question.description = question_params[:description]
+        @question=Question.new(question_params)
         @question.user_id = user_for_token
         if @question.save
            render_error("preguta creada",:created)
@@ -35,7 +32,7 @@ class QuestionsController < ApplicationController
  end
 
  def update
-    @quest=Question.find_by_id(params[:id])
+    @quest=Question.find(params[:id])
         if user_for_token
           if  @quest.user_id==user_for_token
             #update
@@ -51,7 +48,7 @@ class QuestionsController < ApplicationController
         if user_for_token
           @quest=Question.find(params[:id])
               if  @quest.user_id==user_for_token.id
-                   if @quest.answers.count()>0
+                   if @quest.tiene_preguntas
                       render_error("la pregunta tiene respuestas",:unprocessable_entity)
                    else
                       @quest.destroy
@@ -70,7 +67,7 @@ class QuestionsController < ApplicationController
 
  private
  def question_params
-   params.permit(:title,:description,:content)
+   params.permit(:title,:description)
  end
 
 end

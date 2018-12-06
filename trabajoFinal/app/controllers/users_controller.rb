@@ -16,8 +16,8 @@ class UsersController < ApplicationController
   def session
     @user = User.find_by_username(user_params[:username])
     if @user
-      if @user.passworconsulta == user_params[:password]
-        @user.token=@user.generate_token
+      if @user.valida_password(user_params[:password])
+         @user.token=@user.generate_token
         if @user.save
             render json:@user,status: :ok
         else
