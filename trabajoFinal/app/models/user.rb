@@ -2,20 +2,27 @@ require 'bcrypt'
 
 class User < ApplicationRecord
  include BCrypt
- attribute :token
+ validates_uniqueness_of :token, :allow_nil => true
  has_many :questions, dependent: :destroy
  validates_associated :questions
  validates_presence_of :username, :password, :screen_name, :email
  validates :username, uniqueness:  true
- validates :email, uniqueness: true
+ validates :email, uniqueness: true 
+
+ def self.by_token(token)
+ 	  where('updated_at <= ?', 30.minutes.ago).update_all(token: nil) 	  
+      user=find_by token: token 
+      user&.touch
+      user
+ end
 
 
  def existeUsername(username)
-   User.find_by username: username
+      find_by username: username
  end
 
  def existeEmail(email)
-   User.find_by email: email
+     find_by email: email
  end
 
  def passworconsulta

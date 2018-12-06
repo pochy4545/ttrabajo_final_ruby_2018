@@ -9,7 +9,8 @@ end
 response = client.post do |req|
   req.url '/questions/6/answers'
   req.headers['Content-Type'] = 'application/json'
-  req.body = '{ "question": {"token":"6da9edab9df1eecf5bf5d2677b1acfdc","content":"respuesta uno" }}'
+  req.headers["X-QA-Key"]='f66a41e0c2aa1d8c187819f9e9330d5a'
+  req.body = '{"content":"respuesta uno" }'
 end
 
 

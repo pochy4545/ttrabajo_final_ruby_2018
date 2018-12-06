@@ -72,7 +72,7 @@ Rails.application.routes.draw do
     #recibido en el parámetro :question_id.
     #token:no
     #xxxx
-    get '/questions/:question_id/answers', to: 'questions#dameRespuestas'
+    get '/questions/:question_id/answers', to: 'answers#show'
 
     #Crea una nueva respuesta asociada a la pregunta identificada por el parámetro 
     #:question_id con el parámetro content recibido en la petición. Al crearla, se registra
@@ -81,12 +81,12 @@ Rails.application.routes.draw do
     #retornando un código HTTP 422 Unprocessable entity.
     #token:si
     #xxxx
-    post '/questions/:question_id/answers', to: 'questions#crearRespuesta'
+    post '/questions/:question_id/answers', to: 'answers#create'
 
     #Borra la respuesta existente, identificada por el parámetro :id y asociada a la pregunta 
     #identificada por el parámetro :question_id. No se debe permitir el borrado si la respuesta 
     #está marcada como respuesta correcta de la pregunta, o si la petición no es realizada por 
     #el usuario que publicó la respuesta.
     #token:si
-    delete '/questions/:question_id/answers/:id', to: 'questions#eliminarRespuesta'
+    delete '/questions/:question_id/answers/:id', to: 'answers#destroy'
 end

@@ -7,10 +7,10 @@ question = Faraday.new(url: 'http://localhost:3000') do |config|
 end
 
 response = question.post do |req|
-  req.url '/questions'
+  req.url '/questions/6/answers/2'
   req.headers['Content-Type'] = 'application/json'
   req.headers['X-QA-Key'] = "0113e9de4d0f3891d810b877ca26d31e"
-  req.body = '{ "data": {"type":"questions","attributes":{ "title": "test","description":"sasas"} }}'
+  req.body = ''
 end
 
 
