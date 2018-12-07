@@ -6,11 +6,11 @@ question = Faraday.new(url: 'http://localhost:3000') do |config|
   config.adapter  Faraday.default_adapter
 end
 
-response = question.post do |req|
-  req.url '/questions/6/answers/2'
+response = question.delete do |req|
+  req.url '/questions/6/answers/3'
   req.headers['Content-Type'] = 'application/json'
-  req.headers['X-QA-Key'] = "0113e9de4d0f3891d810b877ca26d31e"
-  req.body = ''
+  req.headers['X-QA-Key'] = "0213a348d05a0cc9e9c2c537308dcc44"
+  req.body = '{"content":"test2"}'
 end
 
 

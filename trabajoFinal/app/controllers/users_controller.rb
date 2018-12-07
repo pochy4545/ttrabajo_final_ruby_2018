@@ -15,8 +15,7 @@ class UsersController < ApplicationController
 
   def session
     @user = User.find_by_username(user_params[:username])
-    if @user
-      if @user.valida_password(user_params[:password])
+    if @user and @user.valida_password(user_params[:password])
          @user.token=@user.generate_token
         if @user.save
             render json:@user,status: :ok
@@ -26,9 +25,6 @@ class UsersController < ApplicationController
       else
         render_error("usuario o contraseña incorrecta",422)
       end
-    else
-      render_error("usuario o contraseña incorrecta",422)
-    end
   end
   
 

@@ -6,9 +6,10 @@ class User < ApplicationRecord
  has_many :questions, dependent: :destroy
  validates_associated :questions
  validates_presence_of :username, :password, :screen_name, :email
- validates :username, uniqueness:  true
- validates :email, uniqueness: true 
-
+ validates :username, uniqueness: { message: "username existente"}
+ validates :email, uniqueness: { message: "email existente" }
+ validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
+ 
  def self.by_token(token)
  	  where('updated_at <= ?', 30.minutes.ago).update_all(token: nil) 	  
       user=find_by token: token 

@@ -9,7 +9,7 @@ end
 response = question.get do |req|
   req.url '/questions/6'
   req.headers['Content-Type'] = 'application/json'
-  req.body = '{ "data": {"type":"questions","attributes":{ "answer": "true"}}}'
+  req.body = '{ "answer": "true"}'
 end
 
 
