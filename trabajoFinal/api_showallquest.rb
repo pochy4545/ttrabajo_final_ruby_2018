@@ -9,7 +9,7 @@ end
 response = question.get do |req|
   req.url '/questions'
   req.headers['Content-Type'] = 'application/json'
-  req.body = '{}'
+  req.body = '{"sort":"pending_first"}'
 end
 
 

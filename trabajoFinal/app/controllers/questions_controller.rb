@@ -68,7 +68,7 @@ class QuestionsController < ApplicationController
  
  private
  def question_params
-   params.permit(:title,:description,:answer)
+   params.permit(:title,:description,:answer,:sort)
  end
 
 end

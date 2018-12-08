@@ -11,15 +11,20 @@ class Question < ApplicationRecord
  before_update :validar_respuesta_asociada
 
  def self.by_pending_first
- 	Question.all.order(status: :asc).order(created_at: :desc)
+ 	all.order(status: :asc).order(created_at: :desc)
  end
- 
+ #mirar bien esto
  def self.needing_help
- 	Question.all.where(status: 0).order(created_at: :asc)
+ 	@questions= where(status: 0)
+ 	@questions
+ 	 .left_joins(:answers)
+ 	 .group(:id)
+ 	 .order('count(answers.id) desc')
+
  end
 
  def self.natural_order
-    Question.all.order(created_at: :desc)
+    all.order(created_at: :desc)
  end 
  
  private
