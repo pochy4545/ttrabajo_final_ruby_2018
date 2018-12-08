@@ -29,7 +29,7 @@ class Question < ApplicationRecord
  end
  #pensar esto
  def validar_respuesta_asociada
- 	throw :abort if answers.include?()
+ 	throw :abort if answers.include?("a")
  	
  end
 end

@@ -17,3 +17,4 @@ def valida_respuesta
 	throw :abort if question.id == answer.id
 
 end
+end
