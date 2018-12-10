@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
- #falta
+
  def showall
     @result = case question_params[:sort]
     when "pending_first"then Question.by_pending_first
