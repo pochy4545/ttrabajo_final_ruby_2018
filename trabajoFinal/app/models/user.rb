@@ -6,8 +6,8 @@ class User < ApplicationRecord
  has_many :questions, dependent: :destroy
  validates_associated :questions
  validates_presence_of :username, :password, :screen_name, :email
- validates :username, uniqueness: { message: "username existente"}
- validates :email, uniqueness: { message: "email existente" }
+ validates :username, uniqueness: true
+ validates :email, uniqueness: true
  validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
  
  def self.by_token(token)

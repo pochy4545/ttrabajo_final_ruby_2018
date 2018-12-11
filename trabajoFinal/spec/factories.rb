@@ -1,6 +1,6 @@
 FactoryBot.define do
  factory :user do
- 	username {'agustin'}
+ 	username {Faker::Name.unique.name}
  	email { Faker::Internet.unique.email}
  	screen_name {'pochy4545'}
  	password {'password'}
@@ -20,20 +20,20 @@ FactoryBot.define do
  end
 
  factory :question do
- 	title {Faker::Lorem.setence}
+ 	title {Faker::Lorem.sentence}
  	description {Faker::Lorem.paragraph}
  	status {false}
- 	answer {factory :answer}
- 	user {factory :user}
+ 	answer_id {false}
+ 	user factory: :user
 
  	transient do
- 		answer_count {2}
+ 		answers_count {1}
  	end
 
  	after(:create) do |question,evaluator|
  		create_list(
  			:answer,
- 			evaluator.answer_count,
+ 			evaluator.answers_count,
  			question: question
  			)
  	end
@@ -41,7 +41,7 @@ FactoryBot.define do
 
  factory :answer do
  	content {Faker::Lorem.sentence}
- 	question {factory :question}
- 	user {factory :user}
+ 	question factory: :question
+ 	user factory: :user
  end
 end
