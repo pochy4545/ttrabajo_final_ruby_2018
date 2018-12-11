@@ -7,9 +7,12 @@ RSpec.describe Question, :type => :model do
     expect(question).to be_valid
   end
   
-  describe "validaciones" do
+  describe "relaciones" do
     it {expect(question).to have_many(:answers).dependent(:destroy)}
     it {expect(question).to belong_to(:user)}
+  end
+
+  describe "validaciones" do
     it {expect(question).to validate_presence_of(:title)}
     it {expect(question).to validate_presence_of(:description)}
   end

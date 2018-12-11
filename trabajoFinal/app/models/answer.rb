@@ -5,7 +5,6 @@ class Answer < ApplicationRecord
 
  before_destroy :validar_respuesta
  before_save :validar_status
-#active record colback
 
 private
 def validar_status
