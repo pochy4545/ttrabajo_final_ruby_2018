@@ -13,7 +13,7 @@ class Question < ApplicationRecord
  def self.by_pending_first
  	all.order(status: :asc).order(created_at: :desc)
  end
- #mirar bien esto
+ #mirar bien esto y verificarlo
  def self.needing_help
  	@questions= where(status: 0)
  	@questions

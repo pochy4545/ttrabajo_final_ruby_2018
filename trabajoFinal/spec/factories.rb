@@ -5,17 +5,15 @@ FactoryBot.define do
  	screen_name {'pochy4545'}
  	password {'password'}
  	token { Faker::Number.number(10) }
+    
+    factory :user_with_questions do
+ 		transient do 
+ 			questions_count {1}
+ 		end
 
- 	transient do 
- 		questions_count {1}
- 	end
-
- 	after(:create) do |user, evaluator|
- 		create_list(
- 			:question,
- 			evaluator.questions_count,
- 			user: user
- 			)
+		 	after(:create) do |user, evaluator|
+ 			create_list(:question,evaluator.questions_count,user: user)
+ 			end
  	end
  end
 
@@ -23,25 +21,24 @@ FactoryBot.define do
  	title {Faker::Lorem.sentence}
  	description {Faker::Lorem.paragraph}
  	status {false}
- 	answer_id {false}
- 	user factory: :user
+ 	answer_id {nil}
+ 	user 
 
- 	transient do
- 		answers_count {1}
- 	end
+   factory :question_with_answers do
+ 		transient do
+ 			answers_count {1}
+ 		end
 
- 	after(:create) do |question,evaluator|
- 		create_list(
- 			:answer,
- 			evaluator.answers_count,
- 			question: question
- 			)
+ 		after(:create) do |question,evaluator|
+ 			create_list(:answer,evaluator.answers_count,question: question)
+ 				
+ 		end
  	end
  end
 
  factory :answer do
  	content {Faker::Lorem.sentence}
- 	question factory: :question
- 	user factory: :user
+ 	question 
+ 	user 
  end
 end
