@@ -4,7 +4,7 @@
 
   * Ruby version(ruby 2.5.1)/bundler gem
   * Rails 5.2.1.1
-  * mysql  Ver 14.14 (sudo apt-get install mysql-client libmysqlclient-dev)
+  * mysql (sudo apt-get install mysql-client libmysqlclient-dev)
   * git
   
 ## Comenzando 🚀
