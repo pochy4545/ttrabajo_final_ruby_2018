@@ -13,6 +13,9 @@
    ```
   ## Configuracion:
   ```
+  * bundler install (dentro de la carpeta principal)
+  ```
+  ```
   * Database creation:* mysql -h nombre_servidor -u nombre_usuario -p
                       * create database trabajo_final;
                       * grant all privileges on trabajo_final.* to 'user'@'host' identified by 'password';
@@ -26,9 +29,15 @@
                              guardar y salir
                              *ejecutar rails db:create 
    ```
-   ```
-   *bundler install
-   ```
+  
+### Correr aplicacion:
+  ```
+   rails server  o rails s  (sobre la carpeta principal)
+  ```
+   ### !listo!
+  ```
+   visulaizar en http://localhost:3000
+  ```
 ## Ejecutar todos los test ⚙️
    ```
    * correr todos los test: bundle exec rspec spec/model
