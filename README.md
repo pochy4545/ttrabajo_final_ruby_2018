@@ -11,7 +11,7 @@
    ```
    git clone git@github.com:pochy4545/ttrabajo_final_ruby_2018  o descarcar directamente en zip
    ```
-  ## Configuracion:
+  ## Configuracion 🔧:
   ```
   * bundler install (dentro de la carpeta principal)
   ```
@@ -30,11 +30,11 @@
                              *ejecutar rails db:create 
    ```
   
-### Correr aplicacion:
+### Correr aplicacion  ⌨️:
   ```
    rails server  o rails s  (sobre la carpeta principal)
   ```
-   ### !listo!
+   ### !listo! 📦
   ```
    visulaizar en http://localhost:3000
   ```
