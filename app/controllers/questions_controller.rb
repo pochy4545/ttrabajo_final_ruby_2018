@@ -43,7 +43,6 @@ class QuestionsController < ApplicationController
  def delete
     if user_for_token
       @quest=Question.find(params[:id])
-      #pregunta aca
       if  @quest.user_id==user_for_token.id
         if @quest.destroy
           render json: {:mensaje => "pregunta eliminada"},status:200

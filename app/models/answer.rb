@@ -11,7 +11,7 @@ def validar_status
 	throw :abort   if !question.status 
  
 end
-#mirar
+
 def valida_respuesta
 	throw :abort if question.id == answer.id
 

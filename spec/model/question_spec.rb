@@ -16,5 +16,11 @@ RSpec.describe Question, :type => :model do
     it {expect(question).to validate_presence_of(:title)}
     it {expect(question).to validate_presence_of(:description)}
   end
+  
+  describe "error"do
 
+   #it "deletes the user with answers" do
+   #    expect(question.destroy).to eq(question)
+   #   end
+ end
  end

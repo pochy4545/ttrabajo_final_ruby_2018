@@ -1,10 +1,10 @@
 class AnswersController < ApplicationController
- #rails recue from   
+    
   def show
   @quest=Question.find(params[:question_id])
   render json: @quest.answers
  end
- #mirar
+ 
  def create
   @quest=Question.find_by(params[:question_id])
   if user_for_token
@@ -20,7 +20,7 @@ class AnswersController < ApplicationController
     render_error("genere un nuevo token,token invalido o inexistente",:unprocessable_entity)
   end
  end
- #mirar
+
  def destroy
   @quest=Question.find(params[:question_id])
   @answer=@quest.answers.find_by!(id: params[:id], user:user_for_token)

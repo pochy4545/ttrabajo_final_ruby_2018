@@ -7,13 +7,13 @@ class Question < ApplicationRecord
  attribute :status, default: false
  validates_presence_of :title , :description
 
- before_destroy :validar_tienerespuestas
+ before_destroy :validar_tieneRespuestas
  before_update :validar_respuesta_asociada
 
  def self.by_pending_first
  	all.order(status: :asc).order(created_at: :desc)
  end
- #mirar bien esto y verificarlo
+
  def self.needing_help
  	@questions= where(status: 0)
  	@questions
@@ -32,7 +32,7 @@ class Question < ApplicationRecord
 	throw :abort   if answers.count() > 0 
  
  end
- #pensar esto
+ 
  def validar_respuesta_asociada
  	throw :abort if answers.include?("a")
  	
