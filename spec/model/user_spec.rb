@@ -27,7 +27,7 @@ RSpec.describe User, :type => :model do
      it "verifico que efectivamente tenga una pregunta el usuario" do
         expect(user.questions.count).to eq 1
      end
-     it "verifico que el hash del password ande" do 
+     it "verifico que los metodos de hasheo del paswword ande" do 
        passwordHash= user.passwordHash = "hasheame"
         expect(user.valida_password("hasheame")).to eq true
     end
