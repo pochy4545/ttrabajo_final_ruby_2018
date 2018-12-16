@@ -5,11 +5,10 @@ class User < ApplicationRecord
  validates_uniqueness_of :token, :allow_nil => true
  has_many :questions, dependent: :destroy
  validates_associated :questions
- validates_presence_of :username, :password, :screen_name, :email
+ validates_presence_of :username,  :screen_name, :email ,:password
  validates :username, uniqueness: true
  validates :email, uniqueness: true
  validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
- 
  def self.by_token(token)
  	  where('updated_at <= ?', 30.minutes.ago).update_all(token: nil) 	  
       user=find_by token: token 
@@ -31,8 +30,11 @@ class User < ApplicationRecord
  end
 
  def passwordHash=(new_password)
+   unless new_password.blank?
      @password = Password.create(new_password)
      self.password = @password
+    else return false
+    end
  end
 
  def valida_password(password)

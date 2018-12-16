@@ -8,12 +8,12 @@ class Answer < ApplicationRecord
 
 private
 def validar_status
-	throw :abort   if !question.status 
+	throw :abort   if question.status == 1 
  
 end
 
-def valida_respuesta
-	throw :abort if question.id == answer.id
+def validar_respuesta
+	throw :abort if question.id == id
 
 end
 end

@@ -6,8 +6,8 @@ class Question < ApplicationRecord
  validates_associated :answers 
  attribute :status, default: false
  validates_presence_of :title , :description
-
- before_destroy :validar_tieneRespuestas
+ #"prepend true porque quiero que se ejecute antes de que las answers se destruyan"
+ before_destroy :validar_tieneRespuestas, prepend: true
  before_update :validar_respuesta_asociada
 
  def self.by_pending_first
@@ -29,12 +29,11 @@ class Question < ApplicationRecord
  
  private
  def validar_tieneRespuestas
-	throw :abort   if answers.count() > 0 
- 
+	throw :abort if answers.count() > 0
  end
  
  def validar_respuesta_asociada
- 	throw :abort if answers.include?("a")
+ 	throw :abort if ((answers.select {|x| x.id == answer_id}).count() == 0 )
  	
  end
 end
