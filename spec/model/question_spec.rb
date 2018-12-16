@@ -1,7 +1,7 @@
 require "rails_helper"
 RSpec.describe Question, :type => :model do
   
-  let(:question) { FactoryBot.build(:question_with_answers) }
+  let(:question) { FactoryBot.create(:question_with_answers) }
   
   it "is a valid quest" do
     expect(question).to be_valid
@@ -18,9 +18,12 @@ RSpec.describe Question, :type => :model do
   end
   
   describe "error"do
-
-   #it "deletes the user with answers" do
-   #    expect(question.destroy).to eq(question)
-   #   end
+   
+   it "verifico que realemente tenga una respuesta asociada"do
+        expect(question.answers.count).to eq 1
+   end 
+   it "borrado de question con respuestas" do
+       expect(question.destroy).to eq(false)
+      end
  end
  end

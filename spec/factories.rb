@@ -5,6 +5,7 @@ FactoryBot.define do
  	screen_name {'pochy4545'}
  	password {'password'}
  	token { Faker::Number.number(10) }
+ 	updated_at {Time.new(2001,2,3)}
     
     factory :user_with_questions do
  		transient do 
