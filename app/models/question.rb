@@ -8,7 +8,15 @@ class Question < ApplicationRecord
  validates_presence_of :title , :description
  #"prepend true porque quiero que se ejecute antes de que las answers se destruyan"
  before_destroy :validar_tieneRespuestas, prepend: true
- before_update :validar_respuesta_asociada
+ before_update :validar_respuesta_asociada, if: :validar?
+ 
+ def validar?
+ 	@validar
+ end
+
+ def validar=(op)
+ 	@validar = op
+ end
 
  def self.by_pending_first
  	all.order(status: :asc).order(created_at: :desc)

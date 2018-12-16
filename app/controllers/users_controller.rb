@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
-  #verificado
+  #verificado###
   def showUsers
     @users=User.all
     render json: @users 
   end
   def create
-    #verificado
+    #verificado###
     @user=User.new(user_params)
     @user.passwordHash = user_params[:password]
   	if @user.save
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   	end
   end
   
-  #verificado
+  #verificado###
   def session
     @user = User.find_by_username(user_params[:username])
     if @user and @user.valida_password(user_params[:password])

@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  #verificado  
+  #verificado###  
   def show
   @quest=Question.find(params[:question_id])
   render json: @quest.answers

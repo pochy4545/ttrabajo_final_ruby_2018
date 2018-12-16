@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
  
- #verificado
+ #verificado### 
  def showall
     @result = case question_params[:sort]
     when "pending_first"then Question.by_pending_first
@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
     render json: @result.last(50) ,each_serializer: QuestionshowallSerializer
  end
 
- #verificado
+ #verificado###
  def show
     @quest=Question.find(params[:id])
     if (!question_params[:answer].blank?) 
@@ -18,7 +18,7 @@ class QuestionsController < ApplicationController
         render json: @quest , serializer: QuestionshowSerializer
     end
  end
- #verificado
+ #verificado###
  def create
     if(user_for_token)
       @question=Question.new(question_params)
@@ -33,7 +33,7 @@ class QuestionsController < ApplicationController
     end
  end
 
-#verificado
+#verificado###
  def update
     @quest=Question.find_by!(id: params[:id] ,user: user_for_token)
     if @quest.update_attributes(question_params)
@@ -42,11 +42,12 @@ class QuestionsController < ApplicationController
       render json: @quest.errors, status: :unprocessable_entity
     end
  end
-#vefificado
+#vefificado###
  def delete
     if user_for_token
       @quest=Question.find(params[:id])
       if  @quest.user_id==user_for_token.id
+        @quest.validar = false
         if @quest.destroy
           render json: {:mensaje => "pregunta eliminada"},status:200
        else
@@ -60,9 +61,10 @@ class QuestionsController < ApplicationController
     end
  end
 
- #mirar
+ #verificado###
  def respuesta_correcta
    @quest=Question.find_by!(id:params[:id], user:user_for_token)
+   @quest.validar = true
    if @quest.update_attributes(status: true , answer_id: question_params[:answer_id])
        render json: {:mensaje => "pregunta respondida"},status:200
    else
