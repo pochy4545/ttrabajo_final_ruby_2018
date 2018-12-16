@@ -9,7 +9,7 @@ FactoryBot.define do
     
     factory :user_with_questions do
  		transient do 
- 			questions_count {1}
+ 			questions_count {2}
  		end
 
 		 	after(:create) do |user, evaluator|
@@ -42,4 +42,6 @@ FactoryBot.define do
  	question 
  	user 
  end
+
+
 end

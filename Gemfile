@@ -11,7 +11,7 @@ gem 'oj'
 #para test 
 gem 'test_helper'
 gem 'json'
-
+gem 'database_cleaner'
 group :development, :test do
   gem 'factory_bot_rails'
 end

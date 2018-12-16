@@ -1,7 +1,7 @@
 require "rails_helper"
 RSpec.describe Answer, :type => :model do
   
-  let(:answer) { FactoryBot.build(:answer) }
+  let(:answer) { FactoryBot.create(:answer) }
   
   it "is a valid quest" do
     expect(answer).to be_valid
@@ -19,5 +19,6 @@ RSpec.describe Answer, :type => :model do
 
     
   end
+  
 
  end

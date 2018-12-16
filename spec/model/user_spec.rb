@@ -2,7 +2,7 @@ require "rails_helper"
 RSpec.describe User, :type => :model do
   
   let(:user) { FactoryBot.create(:user_with_questions) }
-  #user = FactoryBot.create(:user_with_questions)
+  
   it "is a valid user" do
     expect(user).to be_valid
   end
@@ -25,16 +25,31 @@ RSpec.describe User, :type => :model do
 
   describe 'validar metodos de instancia' do 
      it "verifico que efectivamente tenga una pregunta el usuario" do
-        expect(user.questions.count).to eq 1
+        expect(user.questions.count).to eq 2
      end
      it "verifico que los metodos de hasheo del paswword ande" do 
        passwordHash= user.passwordHash = "hasheame"
-        expect(user.valida_password("hasheame")).to eq true
-    end
+       expect(user.valida_password("hasheame")).to eq true
+       passwordHash= user.passwordHash = "hasheame"
+       expect(user.valida_password("hashe")).to eq false
+     end
 
+     it "verificar genera_token unico" do
+       token = user.generate_token
+       expect(User.exists?({token: token})).to eq false
+     end
   end
 
   describe 'validar metodos de clase' do
-  end
+    it "vence token" do
+      User.by_token(user.token)
+      expect(user.reload.token).to eq nil
+    end
 
+    it "no vencer token" do
+      user.touch
+      respond = User.by_token(user.token)
+      expect(user.reload.token).to eq respond.token
+    end
+   end
 end
