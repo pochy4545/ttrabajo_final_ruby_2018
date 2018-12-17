@@ -13,7 +13,7 @@ def validar_status
 end
 
 def validar_respuesta
-	throw :abort if question.id == id
+	throw :abort if question.answer_id == id
 
 end
 end
