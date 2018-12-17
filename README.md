@@ -2,7 +2,7 @@
 
 ## Pre_requisitos 📋
 
-  * Ruby version(ruby 2.5.1)/bundler gem
+  * Ruby version(ruby 2.5.1) y bundler
   * Rails 5.2.1.1
   * mysql (sudo apt-get install mysql-client libmysqlclient-dev)
   * git
@@ -18,7 +18,7 @@
   ```
   * Database creation:* mysql -h nombre_servidor -u nombre_usuario -p
                       * create database trabajo_final;
-                      * grant all privileges on trabajo_final.* to 'user'@'host' identified by 'password';
+                      * grant all privileges on trabajo_final.* to 'youruser'@'yourhost' identified by 'yourpassword';
                       * FLUSH PRIVILEGES;
   ```
   ```
@@ -30,7 +30,7 @@
                              *ejecutar rails db:create 
    ```
   ```
-   rails db:seed (para cargar los datos pre-creados)
+   rails db:seed (para cargar los datos pre-creados )
   ```
 ### Correr aplicacion  ⌨️:
   ```
@@ -42,5 +42,5 @@
   ```
 ## Ejecutar todos los test ⚙️
    ```
-   * correr todos los test: bundle exec rspec spec/model
+   * correr todos los test: bundle exec rspec spec/model (sobre la carpeta principal)
    ```
