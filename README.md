@@ -1,5 +1,7 @@
 # README
 
+Es una aplicación desarrollada con Ruby on Rails como trabajo integrador de la materia Taller de Tecnologías de producción de Software de la Universidad Nacional de La Plata.
+
 ## Pre_requisitos 📋
 
   * Ruby version(ruby 2.5.1) y bundler
