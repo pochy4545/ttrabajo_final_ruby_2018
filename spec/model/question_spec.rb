@@ -24,9 +24,20 @@ RSpec.describe Question, :type => :model do
         expect(question.answers.count).to eq 1
    end 
    it "borrado de question con respuestas" do
-       expect(question.destroy).to eq(false)
+       question.save
+       expect(Question.all.count).to eq 1
+       question.destroy
+       expect { Question.all.count }.not_to change { Question.all.count }
    end
+
+   it "borrado de question sin respuesta" do
+    question.answers = []
+    question.save
+    expect(Question.all.count).to eq 1
+    question.destroy
+    expect { Question.all.count }.to change { Question.all.count }.by(0)
  end
+end
 
   describe "metodos de clase" do
     it "by_pending_first" do
