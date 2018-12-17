@@ -29,7 +29,9 @@
                              guardar y salir
                              *ejecutar rails db:create 
    ```
-  
+  ```
+   rails db:seed (para cargar los datos pre-creados)
+  ```
 ### Correr aplicacion  ⌨️:
   ```
    rails server  o rails s  (sobre la carpeta principal)
