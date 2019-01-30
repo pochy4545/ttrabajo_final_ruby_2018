@@ -34,6 +34,8 @@ gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 end
 group :production do 
   gem 'pg'
+  gem 'rails_12factor', '0.0.2'
+
 end
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
