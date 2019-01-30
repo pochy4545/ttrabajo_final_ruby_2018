@@ -54,3 +54,4 @@ production:
   database: trabajoFinal_production
   username: trabajoFinal
   password: <%= ENV['TRABAJOFINAL_DATABASE_PASSWORD'] %>
+  url: postgres://pwsqttndwpsvio:2539f89df4078c4e9ea02ae3815592cc408a6fc27e70aba178c18aa162a08a5d@ec2-23-21-171-25.compute-1.amazonaws.com:5432/d3jluoa405rnop
