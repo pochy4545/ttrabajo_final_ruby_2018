@@ -46,4 +46,7 @@ Es una aplicación desarrollada con Ruby on Rails como trabajo integrador de la 
    ```
    * correr todos los test: bundle exec rspec spec/model (sobre la carpeta principal)
    ```
-no pude subir para esta entrega el proyecto a heroku ya que para el uso de mysql debo instalarle un complemento y no me deja si no ingreso una tarjeta de credito valida , aunque tenga una cuenta free (help)me interesa la subida a heroku mas haya de como este esta entrega
+   
+## app corriendo en heroku
+   ```
+   https://intense-scrubland-21273.herokuapp.com
