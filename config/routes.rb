@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+    get '/', to: 'users#showUsers'
     get 'users', to: 'users#showUsers'
    
     post 'users', to: 'users#create'
