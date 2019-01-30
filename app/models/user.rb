@@ -17,19 +17,19 @@ class User < ApplicationRecord
  end
 
 
- def existeUsername(username)
+ def existe_username(username)
       find_by username: username
  end
 
- def existeEmail(email)
+ def existe_email(email)
      find_by email: email
  end
 
- def passworconsulta
+ def passwor_consulta
      @password ||= Password.new(password)
  end
 
- def passwordHash=(new_password)
+ def password_hash=(new_password)
    unless new_password.blank?
      @password = Password.create(new_password)
      self.password = @password
@@ -38,14 +38,13 @@ class User < ApplicationRecord
  end
 
  def valida_password(password)
-    passworconsulta == password
+    passwor_consulta == password
  end
   
  def generate_token
-     loop do
-       token = SecureRandom.hex
-       return token unless User.exists?({token: token})
-     end
+    loop do
+      token = SecureRandom.hex
+      return token unless User.exists?({token: token})
+    end
  end
- 
 end

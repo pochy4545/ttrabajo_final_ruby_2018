@@ -7,7 +7,7 @@ class Question < ApplicationRecord
  attribute :status, default: false
  validates_presence_of :title , :description
  #"prepend true porque quiero que se ejecute antes de que las answers se destruyan"
- before_destroy :validar_tieneRespuestas, prepend: true
+ before_destroy :validar_tienerespuestas, prepend: true
  before_update :validar_respuesta_asociada, if: :validar?
  
  def validar?
@@ -28,7 +28,6 @@ class Question < ApplicationRecord
  	 .left_joins(:answers)
  	 .group(:id)
  	 .order('count(answers.id) desc')
-
  end
 
  def self.natural_order
@@ -36,7 +35,7 @@ class Question < ApplicationRecord
  end 
  
  private
- def validar_tieneRespuestas
+ def validar_tienerespuestas
 	throw :abort if answers.count() > 0
  end
  

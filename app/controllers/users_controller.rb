@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def create
     #verificado###
     @user=User.new(user_params)
-    @user.passwordHash = user_params[:password]
+    @user.password_hash = user_params[:password]
   	if @user.save
   	      render_error("usuario creado",:created)
   	else

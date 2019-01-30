@@ -50,9 +50,9 @@ class QuestionsController < ApplicationController
         @quest.validar = false
         if @quest.destroy
           render json: {:mensaje => "pregunta eliminada"},status:200
-       else
-        render json: @quest.errors , status: :unprocessable_entity
-       end  
+        else
+          render json: @quest.errors , status: :unprocessable_entity
+        end  
       else
         render_error("no tiene previlegios para borrar la pregunta", :unauthorized)
       end
