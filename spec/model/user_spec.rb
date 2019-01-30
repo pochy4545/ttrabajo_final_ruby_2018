@@ -46,9 +46,11 @@ RSpec.describe User, :type => :model do
       expect(user.reload.token).to eq nil
     end
 
-    it "no vencer token" do
+    it "no vencer token y verificar que el usuario sea el correspondiente" do
       user.touch
       respond = User.by_token(user.token)
+      usercorrespondientetoken = User.find_by(token: respond.token)
+      expect(user).to eq usercorrespondientetoken
       expect(user.reload.token).to eq respond.token
     end
    end
