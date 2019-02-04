@@ -7,11 +7,11 @@ RSpec.describe User, :type => :model do
     expect(user).to be_valid
   end
 
-   describe 'relaciones' do
+  describe 'relaciones' do
     it {expect(user).to have_many(:questions)}
     it { expect(user).to have_many(:questions).dependent(:destroy) }
 
-   end
+  end
 
    describe 'validaciones'do 
     it {expect(user).to validate_uniqueness_of(:username)}
@@ -34,18 +34,31 @@ RSpec.describe User, :type => :model do
        expect(user.valida_password("hashe")).to eq false
      end
 
-     it "verificar genera_token unico" do
-       token = user.generate_token
-       expect(User.exists?({token: token})).to eq false
-     end
   end
-
-  describe 'validar metodos de clase' do
-    it "vence token" do
-      User.by_token(user.token)
-      expect(user.reload.token).to eq nil
+  describe 'generando el token' do
+    let!(:users) { FactoryBot.create_list(:user, 10) }
+    
+    before { allow(SecureRandom).to receive(:hex).and_return('abcd1234') }
+    
+    it 'debe asignar el token generado' do
+      expect(users.pluck(:token)).not_to include('abcd1234')
+      expect(User.exists?({token: 'abcd1234'})).to eq false
+      expect(users.first.generate_token).to eq 'abcd1234'
     end
 
+  end
+  describe 'actualizando el token' do
+  let!(:users) { FactoryBot.create_list(:user, 10, updated_at: Date.yesterday) }
+
+  it 'debe actualizar todos los que estén vencidos' do
+    user = User.by_token(users.first.token)
+    users.map(&:reload)
+    expect(users.pluck(:token)).to all(be nil)     
+    expect(users.map { |user| user.reload.updated_at.to_date }).to all(eq DateTime.now.to_date)
+  end
+end
+
+  describe 'validar metodos de clase' do
     it "no vencer token y verificar que el usuario sea el correspondiente" do
       user.touch
       respond = User.by_token(user.token)

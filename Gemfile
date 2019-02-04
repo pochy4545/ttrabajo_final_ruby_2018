@@ -18,7 +18,7 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 3.6'
 end
-
+gem 'pry-byebug'
 gem 'faker'
 
 group :test do

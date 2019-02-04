@@ -10,7 +10,7 @@ class User < ApplicationRecord
  validates :email, uniqueness: true
  validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
  def self.by_token(token)
- 	  where('updated_at <= ?', 30.minutes.ago).update_all(token: nil) 	  
+ 	  where('updated_at <= ?', 30.minutes.ago).update_all(token: nil,updated_at: DateTime.now) 	  
       user=find_by token: token 
       user&.touch
       user
@@ -43,7 +43,7 @@ class User < ApplicationRecord
   
  def generate_token
     loop do
-      token = SecureRandom.hex
+      token = SecureRandom.hex(4)
       return token unless User.exists?({token: token})
     end
  end
